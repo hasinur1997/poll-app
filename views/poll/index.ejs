@@ -1,0 +1,31 @@
+<!-- Header -->
+<%- include('../layouts/header') %> 
+
+<!-- Navbar  -->
+<%- include('../layouts/navbar') %>
+
+<div class="pol-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                      Poll list
+                      <a href="/create" class="btn btn-primary btn-sm" style="float: right;">Create new</a>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <% for (let p of polls) { %>
+                            <li class="list-group-item">
+                                <a href="/polls/<%= p._id %>"><%= p.title %></a>
+                            </li>
+                           <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<%-include('../layouts/footer') %>

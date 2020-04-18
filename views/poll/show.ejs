@@ -1,0 +1,55 @@
+<!-- Header -->
+<%- include('../layouts/header') %> 
+
+<!-- Navbar  -->
+<%- include('../layouts/navbar') %>
+
+<div class="pol-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                      <%= poll.title %>
+                    </div>
+                    <div class="card-body">
+                        <div class="my-3">
+                            <p><%= poll.description %></p>
+                        </div>
+                        
+                        <div class="my-4">
+                            <h3>Results</h3>
+                            <p>Total Vote: <%= poll.totalVote %></p>
+                            <ul class="list-group">
+                                <% for(let result of results) { %>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <%= result.name %>
+                                        <span class="badge badge-primary badge-pill"><%= result.percentage.toFixed(2) %>%</span>
+                                      </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        
+                        <h5>What is your opinion ? </h5>
+                        <form action="" method="post">
+                            <% for ( let option of poll.options ) { %>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="option" id="<%= option._id %>" value="<%= option._id%>" checked>
+                                    <label class="form-check-label" for="<%= option._id %>">
+                                        <%= option.name %>
+                                    </label>
+                                </div>
+                            <% } %>
+
+                            <div class="form-group my-4">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<%-include('../layouts/footer') %>
