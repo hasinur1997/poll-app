@@ -1,31 +1,29 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const morgan = require('morgan')
-const PollController = require('./controllers/PollController')
+const route = require('./route')
+const db = require('./database/config')
+const PollController = require("./controllers/PollController");
 
-const app = express()
+const app = {
+  init: () => {
+    const config = express();
 
-app.set('view engine', 'ejs')
+    config.set("view engine", "ejs");
+    config.use(morgan("dev"));
+    config.use(express.urlencoded({ extended: true }));
+    config.use(express.json());
 
+    config.get("/", PollController.index);
+    config.get("/create", PollController.create);
+    config.post("/store", PollController.store);
+    config.get("/polls/:id", PollController.show);
+    config.post("/polls/:id", PollController.storeOpinion);
 
-app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+    route.init()
+    db.init()
 
-app.get('/', PollController.index)
-app.get('/create', PollController.createPoll)
-app.post('/store', PollController.storePoll )
-app.get('/polls/:id',PollController.show );
-app.post('/polls/:id', PollController.storeOpinion);
+    config.listen(3000, () => console.log("Listening on 3000"));
+  }
+}
 
-mongoose
-  .connect("mongodb://localhost:27017/mydb", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((res) => {})
-  .catch((e) => {
-    console.log(e);
-  });
-
-app.listen(3000, () => console.log('Listening on 3000'));
+app.init();
