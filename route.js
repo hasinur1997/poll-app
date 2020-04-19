@@ -1,16 +1,12 @@
-const express = require("express");
+const router = require("express").Router();
 const PollController = require("./controllers/PollController");
-const app = express();
 
-const route = {
-    init: () => {
-        console.log('routelkdslkj');
-        // app.get("/", PollController.index);
-        // app.get("/create", PollController.create);
-        // app.post("/store", PollController.store);
-        // app.get("/polls/:id", PollController.show);
-        // app.post("/polls/:id", PollController.storeOpinion);
-    }
-}
+router.get("/", PollController.index);
+router.get("/create", PollController.create);
+router.post("/store", PollController.store);
+router.get("/polls/:id", PollController.show);
+router.post("/polls/:id", PollController.storeOpinion);
+    
 
-module.exports = route;
+
+module.exports = router;

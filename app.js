@@ -13,13 +13,7 @@ const app = {
     config.use(express.urlencoded({ extended: true }));
     config.use(express.json());
 
-    config.get("/", PollController.index);
-    config.get("/create", PollController.create);
-    config.post("/store", PollController.store);
-    config.get("/polls/:id", PollController.show);
-    config.post("/polls/:id", PollController.storeOpinion);
-
-    route.init()
+    config.use("/", route);
     db.init()
 
     config.listen(3000, () => console.log("Listening on 3000"));
