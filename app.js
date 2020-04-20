@@ -13,7 +13,7 @@ const app = {
     config.use(express.urlencoded({ extended: true }));
     config.use(express.json());
     config.set("base", "/poll");
-    config.use("/", route);
+    config.use("/poll", route);
     db.init()
 
     config.listen(3000, () => console.log("Listening on 3000"));
