@@ -12,7 +12,7 @@ const app = {
     config.use(morgan("dev"));
     config.use(express.urlencoded({ extended: true }));
     config.use(express.json());
-
+    config.set("base", "/poll");
     config.use("/", route);
     db.init()
 
